@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Benita Almroth – Web Developer</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;1,400&family=Nunito+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="folder">
@@ -39,7 +45,7 @@
           </div>
           <div class="hero-image">
             <img
-              src="assets/images/profile-picture.png"
+              src="assets/images/profile.png"
               alt="Photo of Benita Almroth"
             />
           </div>
@@ -372,36 +378,46 @@
     </footer>
 
     <script>
-            const tabs = document.querySelectorAll(".tab");
-            const panels = document.querySelectorAll(".panel");
+const tabs = document.querySelectorAll(".tab");
+const panels = document.querySelectorAll(".panel");
 
-            function showTab(target) {
-              tabs.forEach((t) =>
-                t.classList.toggle("active", t.dataset.target === target),
-              );
-              panels.forEach((p) => p.classList.toggle("active", p.id === target));
-              localStorage.setItem("activeTab", target);
-            }
+function showTab(target) {
+  const scrollY = window.scrollY;
 
-            tabs.forEach((tab) => {
-              tab.addEventListener("click", () => showTab(tab.dataset.target));
-            });
+  tabs.forEach((t) =>
+    t.classList.toggle("active", t.dataset.target === target)
+  );
+  panels.forEach((p) => p.classList.toggle("active", p.id === target));
 
-            document.querySelectorAll("button[data-target]").forEach((btn) => {
-              if (!btn.classList.contains("tab")) {
-                btn.addEventListener("click", () => showTab(btn.dataset.target));
-              }
-            });
+  // Lock scroll position so folder height change doesn't cause a jump
+  document.body.style.minHeight = document.body.scrollHeight + "px";
+  window.scrollTo(0, scrollY);
+  requestAnimationFrame(() => {
+    document.body.style.minHeight = "";
+  });
 
-            const saved = localStorage.getItem("activeTab");
-            if (saved) showTab(saved);
+  localStorage.setItem("activeTab", target);
+}
 
-            document.querySelectorAll('.tab-link').forEach(link => {
-          link.addEventListener('click', (e) => {
-              e.preventDefault();
-              showTab(link.dataset.target);
-          });
-      });
+tabs.forEach((tab) => {
+  tab.addEventListener("click", () => showTab(tab.dataset.target));
+});
+
+document.querySelectorAll("button[data-target]").forEach((btn) => {
+  if (!btn.classList.contains("tab")) {
+    btn.addEventListener("click", () => showTab(btn.dataset.target));
+  }
+});
+
+const saved = localStorage.getItem("activeTab");
+if (saved) showTab(saved);
+
+document.querySelectorAll(".tab-link").forEach((link) => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    showTab(link.dataset.target);
+  });
+});
     </script>
   </body>
 </html>
