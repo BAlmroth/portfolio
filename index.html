@@ -15,7 +15,7 @@
   </head>
   <body>
     <div class="folder">
-      <!-- ===== TAB BUTTONS ===== -->
+      <!-- tab buttons -->
       <nav class="tabs" aria-label="Portfolio sections">
         <button class="tab active" data-target="hero">Home</button>
         <button class="tab" data-target="tech-stack">Tech Stack</button>
@@ -24,7 +24,7 @@
         <button class="tab" data-target="contact">Contact</button>
       </nav>
 
-      <!-- ===== FOLDER BODY ===== -->
+      <!-- FOLDERBODY  -->
       <div class="folder-body">
         <!-- HERO -->
         <section id="hero" class="panel active">
@@ -51,7 +51,7 @@
           </div>
         </section>
 
-        <!-- TECH STACK -->
+        <!-- Ttechstack -->
         <section id="tech-stack" class="panel">
           <h2>Tech Stack</h2>
 
@@ -188,7 +188,7 @@
           </div>
         </section>
 
-        <!-- PROJECTS -->
+        <!-- projects -->
         <section id="projects" class="panel">
           <h2>Projects</h2>
 
@@ -290,14 +290,14 @@
           </div>
         </section>
 
-        <!-- ABOUT -->
+        <!-- about -->
         <section id="about" class="panel">
           <h2>About Me</h2>
           <div class="about-content">
             <div class="about-text">
               <p>
                 Hi! I'm Benita, a web development student based in Sweden,
-                Gotheburg. My interest in programming grew from a background in
+                Gothenburg. My interest in programming grew from a background in
                 both classical and digital art/design. I wanted to expand my
                 skills as a creator, and found a new love in programming!
               </p>
@@ -329,7 +329,7 @@
           </div>
         </section>
 
-        <!-- CONTACT -->
+        <!-- contact -->
         <section id="contact" class="panel">
           <h2>Get in Touch</h2>
           <p class="panel-subtitle">
@@ -372,52 +372,58 @@
     </div>
 
     <footer>
+      <div class="wip-tab" role="status" aria-label="Work in progress">
+        <span class="wip-dot" aria-hidden="true"></span>
+        <span>Work in progress</span>
+        <span class="wip-dot" aria-hidden="true"></span>
+      </div>
+
       <p>&copy; <span>2026</span> Benita Almroth</p>
       <a class="tab-link" data-target="contact" href="#">Contact</a>
       <a class="tab-link" data-target="about" href="#">My CV</a>
     </footer>
 
     <script>
-const tabs = document.querySelectorAll(".tab");
-const panels = document.querySelectorAll(".panel");
+      const tabs = document.querySelectorAll(".tab");
+      const panels = document.querySelectorAll(".panel");
 
-function showTab(target) {
-  const scrollY = window.scrollY;
+      function showTab(target) {
+        const scrollY = window.scrollY;
 
-  tabs.forEach((t) =>
-    t.classList.toggle("active", t.dataset.target === target)
-  );
-  panels.forEach((p) => p.classList.toggle("active", p.id === target));
+        tabs.forEach((t) =>
+          t.classList.toggle("active", t.dataset.target === target),
+        );
+        panels.forEach((p) => p.classList.toggle("active", p.id === target));
 
-  // Lock scroll position so folder height change doesn't cause a jump
-  document.body.style.minHeight = document.body.scrollHeight + "px";
-  window.scrollTo(0, scrollY);
-  requestAnimationFrame(() => {
-    document.body.style.minHeight = "";
-  });
+        // Lock scroll position so folder height change doesn't cause a jump
+        document.body.style.minHeight = document.body.scrollHeight + "px";
+        window.scrollTo(0, scrollY);
+        requestAnimationFrame(() => {
+          document.body.style.minHeight = "";
+        });
 
-  localStorage.setItem("activeTab", target);
-}
+        localStorage.setItem("activeTab", target);
+      }
 
-tabs.forEach((tab) => {
-  tab.addEventListener("click", () => showTab(tab.dataset.target));
-});
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => showTab(tab.dataset.target));
+      });
 
-document.querySelectorAll("button[data-target]").forEach((btn) => {
-  if (!btn.classList.contains("tab")) {
-    btn.addEventListener("click", () => showTab(btn.dataset.target));
-  }
-});
+      document.querySelectorAll("button[data-target]").forEach((btn) => {
+        if (!btn.classList.contains("tab")) {
+          btn.addEventListener("click", () => showTab(btn.dataset.target));
+        }
+      });
 
-const saved = localStorage.getItem("activeTab");
-if (saved) showTab(saved);
+      const saved = localStorage.getItem("activeTab");
+      if (saved) showTab(saved);
 
-document.querySelectorAll(".tab-link").forEach((link) => {
-  link.addEventListener("click", (e) => {
-    e.preventDefault();
-    showTab(link.dataset.target);
-  });
-});
+      document.querySelectorAll(".tab-link").forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          showTab(link.dataset.target);
+        });
+      });
     </script>
   </body>
 </html>

@@ -504,6 +504,7 @@ h3 {
 
 /* footer  */
 footer {
+  position: relative;
   text-align: center;
   color: var(--muted);
   font-size: 0.8rem;
@@ -512,6 +513,45 @@ footer {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  border-top: 1px solid var(--tab-4);
+}
+
+.wip-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+
+  background: var(--tab-4);
+  color: rgba(255, 255, 255, 0.75);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+
+  padding: 6px 16px 10px;
+  border-radius: 8px 8px 0 0;
+
+  position: absolute;
+  bottom: 100%;
+  right: 2rem;
+
+  cursor: default;
+  user-select: none;
+  pointer-events: none;
+}
+
+.wip-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  flex-shrink: 0;
+  animation: wip-blink 1.6s ease-in-out infinite;
+}
+
+@keyframes wip-blink {
+  0%, 100% { opacity: 1;    }
+  50%       { opacity: 0.15; }
 }
 
 /* about  */
